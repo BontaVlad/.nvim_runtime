@@ -1,9 +1,10 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" A lot of configurations stolen from: 
+" A lot of configurations stolen from:
 "       Amir Salihefendic
 "       http://amix.dk - amix@amix.dk
 "
 " Sections:
+"    -> NeoBundle configuration
 "    -> General
 "    -> VIM user interface
 "    -> Colors and Fonts
@@ -26,10 +27,82 @@
 "    -> Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => NeoBundle configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Note: Skip initialization for vim-tiny or vim-small.
+ if !1 | finish | endif
+
+ if has('vim_starting')
+   if &compatible
+     set nocompatible               " Be iMproved
+   endif
+
+   " Required:
+   set runtimepath+=~/.nvim_runtime/plugins/neobundle.vim/
+ endif
+
+ " Required:
+ call neobundle#begin(expand('~/.nvim_runtime/plugins/'))
+
+ " Let NeoBundle manage NeoBundle
+ " Required:
+ NeoBundleFetch 'Shougo/neobundle.vim'
+
+ " My Bundles here:
+ " Refer to |:NeoBundle-examples|.
+ " Note: You don't set neobundle setting in .gvimrc!
+ "
+ NeoBundle 'Shougo/vimproc.vim', {
+             \ 'build' : {
+             \     'windows' : 'tools\\update-dll-mingw',
+             \     'cygwin' : 'make -f make_cygwin.mak',
+             \     'mac' : 'make -f make_mac.mak',
+             \     'linux' : 'make',
+             \     'unix' : 'gmake',
+             \    },
+             \ }
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'edkolev/tmuxline.vim'
+NeoBundle 'bling/vim-bufferline'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Valloric/YouCompleteMe'
+NeoBundle 'klen/python-mode'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'tpope/vim-abolish'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'ZoomWin'
+
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Sets how many lines of history VIM has to remember
 set history=700
 
@@ -48,7 +121,7 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
@@ -60,7 +133,7 @@ command W w !sudo tee % > /dev/null
 set so=7
 
 " Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
+let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
@@ -97,23 +170,23 @@ endif
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -131,14 +204,12 @@ set foldcolumn=1
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
-try
-    colorscheme desert
-catch
-endtry
-
+set t_Co=256
 set background=dark
+colorscheme zenburn
+
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -225,8 +296,8 @@ map <leader>ba :1,1000 bd!<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -241,7 +312,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -304,7 +375,7 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
 " Open Ack and put the cursor in the right position
-map <leader>g :Ack 
+map <leader>g :Ack
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
@@ -342,6 +413,11 @@ map <leader>s? z=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" this mapping Enter key to <C-y> to chose the current highlight item
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
@@ -353,9 +429,64 @@ map <leader>x :e ~/buffer.md<cr>
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
+" relative numbers and absolute numbers on current line
+set relativenumber
+set number
+
+" Highlight current line
+set cursorline
+
+" IndentGuides options
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+
+set ts=4 sw=4 et
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
+
+" Syntastic configuration
+let g:syntastic_enable_signs=1
+" let g:syntastic_auto_jump=1
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_check_on_open = 1
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_python_checkers = ['flake8', 'frosted']
+let g:syntastic_javascript_checkers = ['jshint']
+
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \g : go last-used
+nnoremap <Leader>/ :e#<CR>
+
+" No wordwrap
+set nowrap
+
+" NERDTree ignore *.pyc
+let NERDTreeIgnore = ['\.pyc$']
+
+" Enable TagBar
+nmap <F8> :TagbarToggle<CR>
+nmap <Leader>f :TagbarOpen fj<CR>
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ag searching and cope displaying
+"    requires ag.vim - it's much better than vimgrep/grep
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
+map <leader>cc :botright cope<cr>
+map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+map <leader>n :cn<cr>
+map <leader>p :cp<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -364,7 +495,7 @@ function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
     unmenu Foo
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
@@ -387,6 +518,23 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+" Remove trailing space on save
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+"Set tabs to spaces
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
+"Mark the max length line limit
+set textwidth=80
+set cc=80
 
 " Returns true if paste mode is enabled
 function! HasPaste()
@@ -444,15 +592,6 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
-" Colorscheme
-if has("gui_running")
-    set background=dark
-    colorscheme peaksea
-else
-    colorscheme desert
-    let g:colors_name="desert"
-endif
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
@@ -462,7 +601,7 @@ autocmd! bufwritepost vimrc source ~/.vim_runtime/my_configs.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Turn persistent undo on 
+" => Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 try
@@ -482,7 +621,7 @@ cno $j e ./
 cno $c e <C-\>eCurrentFileDir("e")<cr>
 
 " $q is super useful when browsing on the command line
-" it deletes everything until the last slash 
+" it deletes everything until the last slash
 cno $q <C-\>eDeleteTillSlash()<cr>
 
 " Bash like keys for the command line
@@ -550,7 +689,7 @@ func! DeleteTillSlash()
         else
             let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
         endif
-    endif   
+    endif
 
     return g:cmd_edited
 endfunc
