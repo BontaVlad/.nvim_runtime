@@ -14,9 +14,9 @@ tcomment_vim
 tmuxline.vim
 vim-abolish
 vim-airline
-vim-bufferline
 vim-colors-solarized
 vim-css3-syntax
+vim-dispatch
 vim-easymotion
 vim-fugitive
 vim-gitgutter
@@ -24,4 +24,5 @@ vim-indent-guides
 vim-javascript
 vim-repeat
 vim-surround
+vim-virtualenv
 vimproc.vim
