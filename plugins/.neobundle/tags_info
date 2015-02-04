@@ -1,5 +1,5 @@
+FastFold
 YouCompleteMe
-ZoomWin
 ag.vim
 ctrlp.vim
 delimitMate
@@ -22,6 +22,7 @@ vim-fugitive
 vim-gitgutter
 vim-indent-guides
 vim-javascript
+vim-over
 vim-repeat
 vim-surround
 vim-virtualenv

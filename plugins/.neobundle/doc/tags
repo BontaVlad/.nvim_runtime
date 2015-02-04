@@ -329,6 +329,8 @@
 :NeoBundleUpdate	neobundle.txt	/*:NeoBundleUpdate*
 :NeoBundleUpdate!	neobundle.txt	/*:NeoBundleUpdate!*
 :NeoBundleUpdatesLog	neobundle.txt	/*:NeoBundleUpdatesLog*
+:OverCommandLine	over.txt	/*:OverCommandLine*
+:OverCommandLineNoremap	over.txt	/*:OverCommandLineNoremap*
 :PymodeDoc	pymode.txt	/*:PymodeDoc*
 :PymodeLint	pymode.txt	/*:PymodeLint*
 :PymodeLintAuto	pymode.txt	/*:PymodeLintAuto*
@@ -514,6 +516,10 @@ EasyMotion_smartsign	easymotion.txt	/*EasyMotion_smartsign*
 EasyMotion_space_jump_first	easymotion.txt	/*EasyMotion_space_jump_first*
 EasyMotion_use_migemo	easymotion.txt	/*EasyMotion_use_migemo*
 EasyMotion_use_upper	easymotion.txt	/*EasyMotion_use_upper*
+FastFold	FastFold.txt	/*FastFold*
+FastFold-config	FastFold.txt	/*FastFold-config*
+FastFold-intro	FastFold.txt	/*FastFold-intro*
+FastFoldUpdate!	FastFold.txt	/*FastFoldUpdate!*
 GLIBC_2.XX-not-found()	youcompleteme.txt	/*GLIBC_2.XX-not-found()*
 GitGutter	gitgutter.txt	/*GitGutter*
 GitGutterCommands	gitgutter.txt	/*GitGutterCommands*
@@ -590,6 +596,8 @@ NERDTreeOptionSummary	NERD_tree.txt	/*NERDTreeOptionSummary*
 NERDTreeOptions	NERD_tree.txt	/*NERDTreeOptions*
 NERDTreeRender()	NERD_tree.txt	/*NERDTreeRender()*
 NERD_tree.txt	NERD_tree.txt	/*NERD_tree.txt*
+OverCommandLineCursor	over.txt	/*OverCommandLineCursor*
+OverCommandLineCursorInsert	over.txt	/*OverCommandLineCursorInsert*
 ReloadSolution	youcompleteme.txt	/*ReloadSolution*
 ResetCtrlP	ctrlp.txt	/*ResetCtrlP*
 RestartServer	youcompleteme.txt	/*RestartServer*
@@ -597,7 +605,6 @@ StartServer	youcompleteme.txt	/*StartServer*
 StopServer	youcompleteme.txt	/*StopServer*
 Tabular.txt	Tabular.txt	/*Tabular.txt*
 Vim:-Caught-deadly-signal-SEGV	youcompleteme.txt	/*Vim:-Caught-deadly-signal-SEGV*
-ZoomWin.txt	ZoomWin.txt	/*ZoomWin.txt*
 abolish	abolish.txt	/*abolish*
 abolish-abbrev	abolish.txt	/*abolish-abbrev*
 abolish-coercion	abolish.txt	/*abolish-coercion*
@@ -766,6 +773,9 @@ emmet-tutorial	emmet.txt	/*emmet-tutorial*
 emmet-update-image-size	emmet.txt	/*emmet-update-image-size*
 emmet-wrap-with-abbreviation	emmet.txt	/*emmet-wrap-with-abbreviation*
 emmet.txt	emmet.txt	/*emmet.txt*
+fastfold	FastFold.txt	/*fastfold*
+fastfold-config	FastFold.txt	/*fastfold-config*
+fastfold-intro	FastFold.txt	/*fastfold-intro*
 filter-overrides	syntastic.txt	/*filter-overrides*
 fugitive	fugitive.txt	/*fugitive*
 fugitive#head(...)	fugitive.txt	/*fugitive#head(...)*
@@ -846,7 +856,6 @@ g:EasyMotion_use_migemo	easymotion.txt	/*g:EasyMotion_use_migemo*
 g:EasyMotion_use_smartsign_ja	easymotion.txt	/*g:EasyMotion_use_smartsign_ja*
 g:EasyMotion_use_smartsign_us	easymotion.txt	/*g:EasyMotion_use_smartsign_us*
 g:EasyMotion_use_upper	easymotion.txt	/*g:EasyMotion_use_upper*
-g:ZoomWin_funcref	ZoomWin.txt	/*g:ZoomWin_funcref*
 g:ag_apply_lmappings	ag.txt	/*g:ag_apply_lmappings*
 g:ag_apply_qmappings	ag.txt	/*g:ag_apply_qmappings*
 g:ag_format	ag.txt	/*g:ag_format*
@@ -890,6 +899,14 @@ g:neobundle_default_hg_protocol	neobundle.txt	/*g:neobundle_default_hg_protocol*
 g:neobundle_default_site	neobundle.txt	/*g:neobundle_default_site*
 g:neobundle_log_filename	neobundle.txt	/*g:neobundle_log_filename*
 g:neobundle_rm_command	neobundle.txt	/*g:neobundle_rm_command*
+g:over#command_line#paste_escape_chars	over.txt	/*g:over#command_line#paste_escape_chars*
+g:over#command_line#paste_filters	over.txt	/*g:over#command_line#paste_filters*
+g:over#command_line#search#enable_incsearch	over.txt	/*g:over#command_line#search#enable_incsearch*
+g:over#command_line#search#enable_move_cursor	over.txt	/*g:over#command_line#search#enable_move_cursor*
+g:over_command_line_key_mappings	over.txt	/*g:over_command_line_key_mappings*
+g:over_command_line_prompt	over.txt	/*g:over_command_line_prompt*
+g:over_enable_auto_nohlsearch	over.txt	/*g:over_enable_auto_nohlsearch*
+g:over_enable_cmd_window	over.txt	/*g:over_enable_cmd_window*
 g:stderrencoding	vimproc.txt	/*g:stderrencoding*
 g:stdinencoding	vimproc.txt	/*g:stdinencoding*
 g:stdoutencoding	vimproc.txt	/*g:stdoutencoding*
@@ -1010,8 +1027,6 @@ g:ycm_server_use_vim_stdout	youcompleteme.txt	/*g:ycm_server_use_vim_stdout*
 g:ycm_show_diagnostics_ui	youcompleteme.txt	/*g:ycm_show_diagnostics_ui*
 g:ycm_use_ultisnips_completer	youcompleteme.txt	/*g:ycm_use_ultisnips_completer*
 g:ycm_warning_symbol	youcompleteme.txt	/*g:ycm_warning_symbol*
-g:zoomwin_preserve_taglist	ZoomWin.txt	/*g:zoomwin_preserve_taglist*
-g:zoomwin_preserve_winmanager	ZoomWin.txt	/*g:zoomwin_preserve_winmanager*
 gitgutter.txt	gitgutter.txt	/*gitgutter.txt*
 i_<Plug>TComment_<c-_><c-_>	tcomment.txt	/*i_<Plug>TComment_<c-_><c-_>*
 i_<Plug>TComment_<c-_><space>	tcomment.txt	/*i_<Plug>TComment_<c-_><space>*
@@ -1114,6 +1129,18 @@ neobundle-unite-sources	neobundle.txt	/*neobundle-unite-sources*
 neobundle-usage	neobundle.txt	/*neobundle-usage*
 neobundle-variables	neobundle.txt	/*neobundle-variables*
 neobundle.txt	neobundle.txt	/*neobundle.txt*
+over-changelog	over.txt	/*over-changelog*
+over-command_line-autocmd	over.txt	/*over-command_line-autocmd*
+over-command_line-highlight	over.txt	/*over-command_line-highlight*
+over-command_line-key-mappings	over.txt	/*over-command_line-key-mappings*
+over-commands	over.txt	/*over-commands*
+over-contents	over.txt	/*over-contents*
+over-interface	over.txt	/*over-interface*
+over-introduction	over.txt	/*over-introduction*
+over-setting	over.txt	/*over-setting*
+over-variables	over.txt	/*over-variables*
+over.txt	over.txt	/*over.txt*
+over.vim	over.txt	/*over.vim*
 pymode	pymode.txt	/*pymode*
 pymode-breakpoints	pymode.txt	/*pymode-breakpoints*
 pymode-common	pymode.txt	/*pymode-common*
@@ -1370,9 +1397,3 @@ youcompleteme-ycm-does-not-read-identifiers-from-my-tags-files	youcompleteme.txt
 youcompleteme-ycmcompleter-subcommands	youcompleteme.txt	/*youcompleteme-ycmcompleter-subcommands*
 ys	surround.txt	/*ys*
 yss	surround.txt	/*yss*
-zoomwin	ZoomWin.txt	/*zoomwin*
-zoomwin-copyright	ZoomWin.txt	/*zoomwin-copyright*
-zoomwin-history	ZoomWin.txt	/*zoomwin-history*
-zoomwin-options	ZoomWin.txt	/*zoomwin-options*
-zoomwin-setup	ZoomWin.txt	/*zoomwin-setup*
-zoomwin-usage	ZoomWin.txt	/*zoomwin-usage*
