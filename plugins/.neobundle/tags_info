@@ -1,6 +1,8 @@
 FastFold
+GoldenView.Vim
 YouCompleteMe
 ag.vim
+clever-f.vim
 ctrlp.vim
 delimitMate
 emmet-vim
@@ -11,15 +13,18 @@ syntastic
 tabular
 tagbar
 tcomment_vim
+tern_for_vim
 tmuxline.vim
 vim-abolish
 vim-airline
+vim-bookmarks
 vim-colors-solarized
 vim-css3-syntax
 vim-dispatch
 vim-easymotion
 vim-fugitive
 vim-gitgutter
+vim-go
 vim-indent-guides
 vim-javascript
 vim-over

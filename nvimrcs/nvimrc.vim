@@ -89,6 +89,12 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'osyo-manga/vim-over'
+NeoBundle 'MattesGroeger/vim-bookmarks'
+NeoBundle 'rhysd/clever-f.vim'
+NeoBundle 'marijnh/tern_for_vim'
+NeoBundle 'zhaocai/GoldenView.Vim'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'yssl/QFEnter'
 
 
 call neobundle#end()
@@ -122,6 +128,9 @@ let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
+
+" close quick view
+nmap <leader>r :ccl<cr>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
