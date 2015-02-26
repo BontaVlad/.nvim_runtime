@@ -130,7 +130,7 @@ let g:mapleader = ","
 nmap <leader>w :w!<cr>
 
 " Rebind Esc to jk for fast exit
-inoremap jk <Esc>
+inoremap <leader>h <Esc>
 
 " close quick view
 nmap <leader>r :ccl<cr>
