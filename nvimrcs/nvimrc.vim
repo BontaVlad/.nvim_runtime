@@ -129,6 +129,9 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Rebind Esc to jk for fast exit
+inoremap jk <Esc>
+
 " close quick view
 nmap <leader>r :ccl<cr>
 
@@ -276,6 +279,13 @@ set wrap "Wrap lines
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
+" Rebinds J and K in visual mode to move block up or down in relation to the
+" other lines, while keeping the selection.
+" This version also re-indents the line to match indentation rules in its
+" new position. (if you don't like that, remove the 'gv=' in the middle :D)
+" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
