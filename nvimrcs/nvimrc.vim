@@ -76,7 +76,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'jmcantrell/vim-virtualenv'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'rking/ag.vim'
+NeoBundle 'mileszs/ack.vim'
 NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'pangloss/vim-javascript'
@@ -90,11 +90,21 @@ NeoBundle 'tpope/vim-abolish'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'osyo-manga/vim-over'
 NeoBundle 'MattesGroeger/vim-bookmarks'
-NeoBundle 'rhysd/clever-f.vim'
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'yssl/QFEnter'
+NeoBundle 'henrik/vim-qargs'
+NeoBundle 'sjl/tslime.vim'
+NeoBundle 'wlangstroth/vim-racket'
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'jimf/vim-red-green'
+NeoBundle 'phildawes/racer', {
+\   'build' : {
+\     'mac': 'cargo build --release',
+\     'unix': 'cargo build --release',
+\   }
+\ }
 
 
 call neobundle#end()
@@ -311,7 +321,7 @@ map <C-l> <C-W>l
 map <leader>bd :Bclose<cr>
 
 " Close all the buffers
-map <leader>ba :1,1000 bd!<cr>
+map ba :%bd!<cr>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -389,21 +399,21 @@ autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ag searching and cope displaying
+" => Ack searching and cope displaying
 "    requires ack.vim - it's much better than vimgrep/grep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When you press gv you Ag after the selected text
+" When you press gv you Ack after the selected text
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
-" Open Ag and put the cursor in the right position
-map <leader>g :Ag
+" Open Ack and put the cursor in the right position
+map <leader>g :Ack
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
 " Do :help cope if you are unsure what cope is. It's super useful!
 "
-" When you search with Ag, display your results in cope by doing:
+" When you search with Ack, display your results in cope by doing:
 "   <leader>cc
 "
 " To go to the next search result do:
@@ -499,8 +509,8 @@ nmap <Leader>f :TagbarOpen fj<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ag searching and cope displaying
-"    requires ag.vim - it's much better than vimgrep/grep
+" => Ack searching and cope displaying
+"    requires ack.vim - it's much better than vimgrep/grep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
