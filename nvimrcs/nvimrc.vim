@@ -62,11 +62,12 @@
              \     'unix' : 'gmake',
              \    },
              \ }
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'kien/ctrlp.vim'
+" NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'klen/python-mode'
 NeoBundle 'Konfekt/FastFold'
@@ -76,7 +77,7 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'jmcantrell/vim-virtualenv'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'mileszs/ack.vim'
+" NeoBundle 'mileszs/ack.vim'
 NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'pangloss/vim-javascript'
@@ -89,7 +90,7 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'osyo-manga/vim-over'
-NeoBundle 'MattesGroeger/vim-bookmarks'
+" NeoBundle 'MattesGroeger/vim-bookmarks'
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'fatih/vim-go'
@@ -99,6 +100,7 @@ NeoBundle 'sjl/tslime.vim'
 NeoBundle 'wlangstroth/vim-racket'
 NeoBundle 'rust-lang/rust.vim'
 NeoBundle 'jimf/vim-red-green'
+NeoBundle 'kopischke/unite-spell-suggest'
 NeoBundle 'phildawes/racer', {
 \   'build' : {
 \     'mac': 'cargo build --release',
@@ -142,7 +144,7 @@ nmap <leader>w :w!<cr>
 " Rebind Esc to jk for fast exit
 inoremap <leader>h <Esc>
 
-" close quick view
+" Close quick view
 nmap <leader>r :ccl<cr>
 
 " :W sudo saves the file
@@ -438,7 +440,7 @@ map <leader>ss :setlocal spell!<cr>
 map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
-map <leader>s? z=
+map <leader>s? :Unite spell_suggest
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -476,22 +478,6 @@ set ts=4 sw=4 et
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
-"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
-
-" Syntastic configuration
-let g:syntastic_enable_signs=1
-" let g:syntastic_auto_jump=1
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_check_on_open = 1
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_python_checkers = ['flake8', 'frosted']
-let g:syntastic_javascript_checkers = ['jshint']
-
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
 " \g : go last-used
@@ -506,18 +492,6 @@ let NERDTreeIgnore = ['\.pyc$']
 " Enable TagBar
 nmap <F8> :TagbarToggle<CR>
 nmap <Leader>f :TagbarOpen fj<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ack searching and cope displaying
-"    requires ack.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ackprg = 'ag --nogroup --nocolor --column'
-
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
