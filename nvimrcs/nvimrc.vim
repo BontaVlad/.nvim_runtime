@@ -63,6 +63,7 @@
              \    },
              \ }
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tpope/vim-surround'
@@ -90,7 +91,7 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'osyo-manga/vim-over'
-" NeoBundle 'MattesGroeger/vim-bookmarks'
+NeoBundle 'MattesGroeger/vim-bookmarks'
 NeoBundle 'marijnh/tern_for_vim'
 NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'fatih/vim-go'
@@ -100,7 +101,11 @@ NeoBundle 'sjl/tslime.vim'
 NeoBundle 'wlangstroth/vim-racket'
 NeoBundle 'rust-lang/rust.vim'
 NeoBundle 'jimf/vim-red-green'
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'xolox/vim-misc'
 NeoBundle 'kopischke/unite-spell-suggest'
+NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'phildawes/racer', {
 \   'build' : {
 \     'mac': 'cargo build --release',
@@ -145,7 +150,7 @@ nmap <leader>w :w!<cr>
 inoremap <leader>h <Esc>
 
 " Close quick view
-nmap <leader>r :ccl<cr>
+nmap <leader>r :UniteClose<cr>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
@@ -166,14 +171,6 @@ source $VIMRUNTIME/menu.vim
 
 " Turn on the WiLd menu
 set wildmenu
-
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-else
-    set wildignore+=.git\*,.hg\*,.svn\*
-endif
 
 "Always show current position
 set ruler
@@ -286,11 +283,6 @@ set wrap "Wrap lines
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
-
 " Rebinds J and K in visual mode to move block up or down in relation to the
 " other lines, while keeping the selection.
 " This version also re-indents the line to match indentation rules in its
@@ -398,37 +390,6 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ack searching and cope displaying
-"    requires ack.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When you press gv you Ack after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-
-" Open Ack and put the cursor in the right position
-map <leader>g :Ack
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with Ack, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking

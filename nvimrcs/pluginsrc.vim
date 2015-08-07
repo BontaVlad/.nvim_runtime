@@ -17,9 +17,6 @@ let g:goldenview__enable_default_mapping = 0
 " When invoked, unless a starting directory is specified, CtrlP will set its local working directory according to this variable:
 let g:ctrlp_working_path_mode = 'ra'
 
-"Exclude files and directories using Vim's wildignore and CtrlP's own g:ctrlp_custom_ignore:
-set wildignore+=*/tmp/*,**/migrations/*,**/logs/*,**/htdocs/*,**/deploy/*,*.so,*.swp,*.zip,
-
 " IndentGuides options
 let g:indent_guides_auto_colors = 0
 let g:indent_guides_enable_on_vim_startup = 1
@@ -31,7 +28,6 @@ let g:indent_guides_guide_size = 1
 
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=238
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
-
 
 " Syntastic configuration
 let g:syntastic_enable_signs=1
@@ -47,6 +43,8 @@ let g:syntastic_python_checkers = ['flake8', 'frosted']
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_c_checkers = ['clang_check', 'gcc']
 let g:syntastic_c_compiler = 'clang'
+let g:syntastic_enable_elixir_checker = 1       "enable check for elixir
+let g:syntastic_elixir_checkers = ['elixir']
 
 " NERDTree ignore *.pyc
 let NERDTreeIgnore = ['\.pyc$']
@@ -107,32 +105,28 @@ NeoBundle 'Shougo/unite.vim' "{{{
     endif
 
     function! s:unite_settings()
-      nmap <buffer> Q <plug>(unite_exit)
-      nmap <buffer> <esc> <plug>(unite_exit)
-      imap <buffer> <esc> <plug>(unite_exit)
+      nmap <buffer> q <plug>(unite_exit)
     endfunction
     autocmd FileType unite call s:unite_settings()
 
     nmap <space> [unite]
     nnoremap [unite] <nop>
     "
-    nnoremap <silent> [unite]<space> :<C-u>Unite -toggle -auto-resize -buffer-name=mixed file_rec/async:! buffer file_mru bookmark<cr><c-u>
-    nnoremap <silent> [unite]f :<C-u>Unite -toggle -auto-resize -buffer-name=files file_rec/async:!<cr><c-u>
-    nnoremap <silent> [unite]e :<C-u>Unite -buffer-name=recent file_mru<cr>
+    nnoremap <silent> [unite]<space> :<C-u>Unite -toggle -start-insert -auto-resize -buffer-name=mixed file_rec/neovim buffer file_mru bookmark<cr><c-u>
+    nnoremap <silent> [unite]f :<C-u>Unite -toggle -auto-resize -start-insert -buffer-name=files file_rec/neovim<cr><c-u>
+    nnoremap <silent> [unite]e :<C-u>Unite -quick-match -buffer-name=recent file_mru<cr>
     nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
-    nnoremap <silent> [unite]l :<C-u>Unite -auto-resize -buffer-name=line line<cr>
+    nnoremap <silent> [unite]l :<C-u>Unite -here -auto-preview -start-insert -buffer-name=line line<cr>
     nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer file_mru<cr>
     nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
+    nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -no-quit -buffer-name=search grep:.<cr>
     nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
     nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
+    nnoremap <silent> [unite]ss :<C-u>Unite -quick-match spell_suggest<cr>
 "}}}
+call neobundle#end()
+
 NeoBundleLazy 'Shougo/neomru.vim', {'autoload':{'unite_sources':'file_mru'}}
-" NeoBundleLazy 'osyo-manga/unite-airline_themes', {'autoload':{'unite_sources':'airline_themes'}} "{{{
-"   nnoremap <silent> [unite]a :<C-u>Unite -winheight=10 -auto-preview -buffer-name=airline_themes airline_themes<cr>
-" "}}}
-" NeoBundleLazy 'ujihisa/unite-colorscheme', {'autoload':{'unite_sources':'colorscheme'}} "{{{
-"   nnoremap <silent> [unite]c :<C-u>Unite -winheight=10 -auto-preview -buffer-name=colorschemes colorscheme<cr>
-" "}}}
 NeoBundleLazy 'tsukkee/unite-tag', {'autoload':{'unite_sources':['tag','tag/file']}} "{{{
   nnoremap <silent> [unite]t :<C-u>Unite -auto-resize -buffer-name=tag tag tag/file<cr>
 "}}}
@@ -141,10 +135,6 @@ NeoBundleLazy 'Shougo/unite-outline', {'autoload':{'unite_sources':'outline'}} "
 "}}}
 NeoBundleLazy 'Shougo/unite-help', {'autoload':{'unite_sources':'help'}} "{{{
   nnoremap <silent> [unite]h :<C-u>Unite -auto-resize -buffer-name=help help<cr>
-"}}}
-" NeoBundleLazy 'Shougo/junkfile.vim', {'autoload':{'commands':'JunkfileOpen','unite_sources':['junkfile','junkfile/new']}} "{{{
-"   let g:junkfile#directory=s:get_cache_dir('junk')
-"   nnoremap <silent> [unite]j :<C-u>Unite -auto-resize -buffer-name=junk junkfile junkfile/new<cr>
 "}}}
 
 " YouCompleteMe
