@@ -53,7 +53,7 @@
  " Refer to |:NeoBundle-examples|.
  " Note: You don't set neobundle setting in .gvimrc!
  "
- NeoBundle 'Shougo/vimproc.vim', {
+NeoBundle 'Shougo/vimproc.vim', {
              \ 'build' : {
              \     'windows' : 'tools\\update-dll-mingw',
              \     'cygwin' : 'make -f make_cygwin.mak',
@@ -62,51 +62,25 @@
              \     'unix' : 'gmake',
              \    },
              \ }
+NeoBundle 'Konfekt/FastFold'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'scrooloose/syntastic'
-" NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'klen/python-mode'
-NeoBundle 'Konfekt/FastFold'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'bling/vim-airline'
-NeoBundle 'jmcantrell/vim-virtualenv'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-" NeoBundle 'mileszs/ack.vim'
-NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'mattn/emmet-vim'
+NeoBundle 'benekastah/neomake'
 NeoBundle 'Valloric/YouCompleteMe'
-NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tpope/vim-abolish'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'osyo-manga/vim-over'
-NeoBundle 'MattesGroeger/vim-bookmarks'
-NeoBundle 'marijnh/tern_for_vim'
-NeoBundle 'zhaocai/GoldenView.Vim'
-NeoBundle 'fatih/vim-go'
-NeoBundle 'yssl/QFEnter'
 NeoBundle 'henrik/vim-qargs'
-NeoBundle 'sjl/tslime.vim'
-NeoBundle 'wlangstroth/vim-racket'
-NeoBundle 'rust-lang/rust.vim'
-NeoBundle 'jimf/vim-red-green'
-NeoBundle 'xolox/vim-easytags'
-NeoBundle 'xolox/vim-misc'
+" NeoBundle 'sjl/tslime.vim'
+" NeoBundle 'xolox/vim-easytags'
+" NeoBundle 'xolox/vim-misc'
+NeoBundle 'vim-scripts/indentpython.vim'
 NeoBundle 'kopischke/unite-spell-suggest'
-NeoBundle 'derekwyatt/vim-scala'
-NeoBundle 'elixir-lang/vim-elixir'
-
+" this should realy be taken out
 NeoBundle 'Shougo/unite.vim' "{{{
     let bundle = neobundle#get('unite.vim')
     function! bundle.hooks.on_source(bundle)
@@ -143,7 +117,7 @@ NeoBundle 'Shougo/unite.vim' "{{{
     nnoremap <silent> [unite]f :<C-u>Unite -toggle -auto-resize -start-insert -buffer-name=files file_rec/neovim<cr><c-u>
     nnoremap <silent> [unite]e :<C-u>Unite -quick-match -buffer-name=recent file_mru<cr>
     nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
-    nnoremap <silent> [unite]l :<C-u>Unite -here -auto-preview -start-insert -buffer-name=line line<cr>
+    nnoremap <silent> [unite]l :<C-u>Unite -no-split -auto-preview -start-insert -buffer-name=line line<cr>
     nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer file_mru<cr>
     nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
     nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -no-quit -buffer-name=search grep:.<cr>
@@ -162,6 +136,7 @@ NeoBundle 'Shougo/unite-outline', {'autoload':{'unite_sources':'outline'}} "{{{
 NeoBundle 'Shougo/unite-help', {'autoload':{'unite_sources':'help'}} "{{{
   nnoremap <silent> [unite]h :<C-u>Unite -auto-resize -buffer-name=help help<cr>
 "}}}
+
 call neobundle#end()
 
 " Required:
@@ -305,7 +280,6 @@ set nobackup
 set nowb
 set noswapfile
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -418,19 +392,6 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
-endif
-
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -438,7 +399,6 @@ func! DeleteTrailingWS()
   exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -450,7 +410,8 @@ map <leader>ss :setlocal spell!<cr>
 map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
-map <leader>s? :Unite spell_suggest
+" move this to plugin configuration
+" map <leader>s? :Unite spell_suggest
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -462,13 +423,7 @@ map <leader>s? :Unite spell_suggest
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
-
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
+" noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
@@ -479,15 +434,6 @@ set number
 " Highlight current line
 set cursorline
 
-" IndentGuides options
-let g:indent_guides_auto_colors = 0
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
-
-set ts=4 sw=4 et
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-
 " Mappings to access buffers (don't use "\p" because a
 " delay before pressing "p" would accidentally paste).
 " \g : go last-used
@@ -496,12 +442,6 @@ nnoremap <Leader>/ :e#<CR>
 " No wordwrap
 set nowrap
 
-" NERDTree ignore *.pyc
-let NERDTreeIgnore = ['\.pyc$']
-
-" Enable TagBar
-nmap <F8> :TagbarToggle<CR>
-nmap <Leader>f :TagbarOpen fj<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
