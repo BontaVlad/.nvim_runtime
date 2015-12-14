@@ -35,8 +35,9 @@ let g:syntastic_enable_signs=1
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
+
 let g:syntastic_check_on_open = 1
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_python_checkers = ['flake8', 'frosted']
@@ -46,26 +47,17 @@ let g:syntastic_c_compiler = 'clang'
 let g:syntastic_enable_elixir_checker = 1       "enable check for elixir
 let g:syntastic_elixir_checkers = ['elixir']
 
-" NERDTree ignore *.pyc
-let NERDTreeIgnore = ['\.pyc$']
-
 " Enable TagBar
 nmap <F8> :TagbarToggle<CR>
 nmap <Leader>f :TagbarOpen fj<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ag searching and cope displaying
-"    requires ag.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Use ack with silver Searcher
-if executable('ag')
-  let g:ackprg = 'ag --nogroup --nocolor --column'
-endif
 
 map <leader>cc :botright cope<cr>
 map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
+
+"Make easytags generate tags async
+let g:easytags_async = 1
 
 " Pymode vim settings
 let g:pymode_lint = 0
@@ -79,73 +71,10 @@ let g:pymode_virtualenv = 1
 let g:pymode_rope_regenerate_on_write = 0
 let g:pymode_rope_autoimport = 0
 " let g:pymode_doc_bind = 'D'
-
-NeoBundle 'Shougo/unite.vim' "{{{
-    let bundle = neobundle#get('unite.vim')
-    function! bundle.hooks.on_source(bundle)
-        call unite#filters#matcher_default#use(['matcher_fuzzy'])
-        call unite#filters#sorter_default#use(['sorter_rank'])
-        call unite#custom#profile('default', 'context', {
-              \ 'start_insert': 1
-              \ })
-    endfunction
-
-    let g:unite_data_directory='~/.unite_cache'
-    let g:unite_source_history_yank_enable=1
-    let g:unite_source_rec_max_cache_files=5000
-
-    if executable('ag')
-        let g:unite_source_grep_command='ag'
-        let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S -C4'
-        let g:unite_source_grep_recursive_opt=''
-    elseif executable('ack')
-        let g:unite_source_grep_command='ack'
-        let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
-        let g:unite_source_grep_recursive_opt=''
-    endif
-
-    function! s:unite_settings()
-      nmap <buffer> q <plug>(unite_exit)
-    endfunction
-    autocmd FileType unite call s:unite_settings()
-
-    nmap <space> [unite]
-    nnoremap [unite] <nop>
-    "
-    nnoremap <silent> [unite]<space> :<C-u>Unite -toggle -start-insert -auto-resize -buffer-name=mixed file_rec/neovim buffer file_mru bookmark<cr><c-u>
-    nnoremap <silent> [unite]f :<C-u>Unite -toggle -auto-resize -start-insert -buffer-name=files file_rec/neovim<cr><c-u>
-    nnoremap <silent> [unite]e :<C-u>Unite -quick-match -buffer-name=recent file_mru<cr>
-    nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
-    nnoremap <silent> [unite]l :<C-u>Unite -here -auto-preview -start-insert -buffer-name=line line<cr>
-    nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer file_mru<cr>
-    nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
-    nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -no-quit -buffer-name=search grep:.<cr>
-    nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
-    nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
-    nnoremap <silent> [unite]ss :<C-u>Unite -quick-match spell_suggest<cr>
-"}}}
-call neobundle#end()
-
-NeoBundleLazy 'Shougo/neomru.vim', {'autoload':{'unite_sources':'file_mru'}}
-NeoBundleLazy 'tsukkee/unite-tag', {'autoload':{'unite_sources':['tag','tag/file']}} "{{{
-  nnoremap <silent> [unite]t :<C-u>Unite -auto-resize -buffer-name=tag tag tag/file<cr>
-"}}}
-NeoBundleLazy 'Shougo/unite-outline', {'autoload':{'unite_sources':'outline'}} "{{{
-  nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<cr>
-"}}}
-NeoBundleLazy 'Shougo/unite-help', {'autoload':{'unite_sources':'help'}} "{{{
-  nnoremap <silent> [unite]h :<C-u>Unite -auto-resize -buffer-name=help help<cr>
-"}}}
+"
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-
-" racer Rust autocomplete plugin
-set hidden
-let g:racer_cmd = "/usr/share/racer/target/release/racer"
-let $RUST_SRC_PATH="/usr/local/src/rust/src"
-" insert racer autocomplete in neocomplete
-let g:racer_cmd = 'racer'
 
 " vim-rachet settings
 if has("autocmd")

@@ -106,14 +106,62 @@ NeoBundle 'xolox/vim-misc'
 NeoBundle 'kopischke/unite-spell-suggest'
 NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'elixir-lang/vim-elixir'
-NeoBundle 'phildawes/racer', {
-\   'build' : {
-\     'mac': 'cargo build --release',
-\     'unix': 'cargo build --release',
-\   }
-\ }
 
+NeoBundle 'Shougo/unite.vim' "{{{
+    let bundle = neobundle#get('unite.vim')
+    function! bundle.hooks.on_source(bundle)
+        call unite#filters#matcher_default#use(['matcher_fuzzy'])
+        call unite#filters#sorter_default#use(['sorter_rank'])
+        call unite#custom#profile('default', 'context', {
+              \ 'start_insert': 1
+              \ })
+    endfunction
 
+    let g:unite_data_directory='~/.unite_cache'
+    let g:unite_source_history_yank_enable=1
+    let g:unite_source_rec_max_cache_files=5000
+
+    if executable('ag')
+        let g:unite_source_grep_command='ag'
+        let g:unite_source_grep_default_opts='--nocolor --line-numbers --nogroup -S'
+        let g:unite_source_grep_recursive_opt=''
+    elseif executable('ack')
+        let g:unite_source_grep_command='ack'
+        let g:unite_source_grep_default_opts='--no-heading --no-color -C4'
+        let g:unite_source_grep_recursive_opt=''
+    endif
+
+    function! s:unite_settings()
+      nmap <buffer> q <plug>(unite_exit)
+    endfunction
+    autocmd FileType unite call s:unite_settings()
+
+    nmap <space> [unite]
+    nnoremap [unite] <nop>
+    "
+    nnoremap <silent> [unite]<space> :<C-u>Unite -toggle -start-insert -auto-resize -buffer-name=mixed file_rec/neovim buffer file_mru bookmark<cr><c-u>
+    nnoremap <silent> [unite]f :<C-u>Unite -toggle -auto-resize -start-insert -buffer-name=files file_rec/neovim<cr><c-u>
+    nnoremap <silent> [unite]e :<C-u>Unite -quick-match -buffer-name=recent file_mru<cr>
+    nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
+    nnoremap <silent> [unite]l :<C-u>Unite -here -auto-preview -start-insert -buffer-name=line line<cr>
+    nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer file_mru<cr>
+    nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
+    nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -no-quit -buffer-name=search grep:.<cr>
+    nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
+    nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
+    nnoremap <silent> [unite]ss :<C-u>Unite -quick-match spell_suggest<cr>
+"}}}
+
+NeoBundle 'Shougo/neomru.vim', {'autoload':{'unite_sources':'file_mru'}}
+NeoBundle 'tsukkee/unite-tag', {'autoload':{'unite_sources':['tag','tag/file']}} "{{{
+  nnoremap <silent> [unite]t :<C-u>Unite -auto-resize -buffer-name=tag tag tag/file<cr>
+"}}}
+NeoBundle 'Shougo/unite-outline', {'autoload':{'unite_sources':'outline'}} "{{{
+  nnoremap <silent> [unite]o :<C-u>Unite -auto-resize -buffer-name=outline outline<cr>
+"}}}
+NeoBundle 'Shougo/unite-help', {'autoload':{'unite_sources':'help'}} "{{{
+  nnoremap <silent> [unite]h :<C-u>Unite -auto-resize -buffer-name=help help<cr>
+"}}}
 call neobundle#end()
 
 " Required:
@@ -299,8 +347,9 @@ map j gj
 map k gk
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+" conflicts with unite
+" map <space> /
+" map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
