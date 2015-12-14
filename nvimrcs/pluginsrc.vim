@@ -32,8 +32,10 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
 " let g:syntastic_enable_elixir_checker = 1       "enable check for elixir
 " let g:syntastic_elixir_checkers = ['elixir']
 "
-"Make easytags generate tags async
-" let g:easytags_async = 1
+" Make easytags generate tags async
+autocmd FileType python let b:easytags_auto_highlight = 0
+let g:easytags_async = 1
+let g:easytags_syntax_keyword = 'always'
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
