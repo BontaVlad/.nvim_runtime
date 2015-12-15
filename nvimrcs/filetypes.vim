@@ -4,9 +4,9 @@
 set foldmethod=indent
 
 let g:tex_fold_enabled=1
-let g:vimsyn_folding='af'
-let g:xml_syntax_folding = 1
-let python_highlight_all = 1
+" let g:vimsyn_folding='af'
+" let g:xml_syntax_folding = 1
+" let python_highlight_all = 1
 " au FileType python syn keyword pythonDecorator True None False self
 
 " au BufNewFile,BufRead *.jinja set syntax=htmljinja
@@ -47,3 +47,15 @@ function! JavaScriptFold()
     endfunction
     setl foldtext=FoldText()
 endfunction
+"
+"
+" """"""""""""""""""""""""""""""
+" " => CoffeeScript section
+" """""""""""""""""""""""""""""""
+" function! CoffeeScriptFold()
+"     setl foldmethod=indent
+"     setl foldlevelstart=1
+" endfunction
+" au FileType coffee call CoffeeScriptFold()
+"
+" au FileType gitcommit call setpos('.', [0, 1, 1, 0])
