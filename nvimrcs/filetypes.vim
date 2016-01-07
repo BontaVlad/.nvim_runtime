@@ -4,8 +4,8 @@
 set foldmethod=indent
 
 let g:tex_fold_enabled=1
-" let g:vimsyn_folding='af'
-" let g:xml_syntax_folding = 1
+let g:vimsyn_folding='af'
+let g:xml_syntax_folding = 1
 " let python_highlight_all = 1
 " au FileType python syn keyword pythonDecorator True None False self
 

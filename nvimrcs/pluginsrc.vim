@@ -18,6 +18,8 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=238
 autocmd FileType python let b:easytags_auto_highlight = 0
 let g:easytags_async = 1
 let g:easytags_syntax_keyword = 'always'
+set tags=./tags
+let g:easytags_dynamic_files = 1
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
@@ -34,3 +36,6 @@ let g:neomake_python_enabled_makers = ['flake8']
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Goldenview configuration
+let g:goldenview__enable_default_mapping = 0 "disable default keybindings

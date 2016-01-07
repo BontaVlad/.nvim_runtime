@@ -65,6 +65,7 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'Konfekt/FastFold'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'zhaocai/GoldenView.Vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'bling/vim-airline'
@@ -75,12 +76,14 @@ NeoBundle 'benekastah/neomake'
 NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'tpope/vim-abolish'
 NeoBundle 'henrik/vim-qargs'
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'godlygeek/tabular'
+" NeoBundle 'zah/nim.vim'
 NeoBundle 'edkolev/tmuxline.vim'
 " NeoBundle 'sjl/tslime.vim'
-" NeoBundle 'xolox/vim-easytags'
-" NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'xolox/vim-misc'
 NeoBundle 'vim-scripts/indentpython.vim'
-NeoBundle 'kopischke/unite-spell-suggest'
 " this should realy be taken out
 NeoBundle 'Shougo/unite.vim' "{{{
     let bundle = neobundle#get('unite.vim')
@@ -123,11 +126,15 @@ NeoBundle 'Shougo/unite.vim' "{{{
     nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
     nnoremap <silent> [unite]g :<C-u>UniteWithCursorWord -no-quit -buffer-name=search grep:.<cr>
     nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
-    nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
-    nnoremap <silent> [unite]ss :<C-u>Unite -quick-match spell_suggest<cr>
+    nnoremap <silent> [unite]s :<C-u>Unite -start-insert buffer<cr>
 "}}}
 
 NeoBundle 'Shougo/neomru.vim', {'autoload':{'unite_sources':'file_mru'}}
+
+NeoBundle 'kopischke/unite-spell-suggest', {'autoload':{'unite_sources':'spell_sugest'}} "{{{
+    nnoremap <silent> [unite]ss :<C-u>Unite -quick-match spell_suggest<cr>
+"}}}
+
 NeoBundle 'tsukkee/unite-tag', {'autoload':{'unite_sources':['tag','tag/file']}} "{{{
   nnoremap <silent> [unite]t :<C-u>Unite -auto-resize -buffer-name=tag tag tag/file<cr>
 "}}}
